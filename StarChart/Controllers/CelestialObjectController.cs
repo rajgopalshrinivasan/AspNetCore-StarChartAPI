@@ -91,7 +91,7 @@ namespace StarChart.Controllers
             return CreatedAtRoute("GetById", new { id = celestialObject.Id }, celestialObject);
         }
 
-        [HttpPatch]
+        [HttpPatch("{id}/{name}")]
         public IActionResult RenameObject(int id, string name)
         {
             var item = _context.CelestialObjects.Find(id);
@@ -106,12 +106,12 @@ namespace StarChart.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var items = _context.CelestialObjects.Where(a => a.Id == id && a.OrbitedObjectId == id);
 
-            if(!items.Any())
+            if (!items.Any())
             {
                 return NotFound();
             }
